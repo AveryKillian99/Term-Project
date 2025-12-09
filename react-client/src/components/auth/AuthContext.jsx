@@ -1,0 +1,48 @@
+import { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_API_BASE_URL || 'http://localhost:5000';
+
+const AuthContext = createContext(null);
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function checkUserSession() {
+      try {
+        const { data } = await axios.get(`${BACKEND_URL}/auth/me`, {
+          withCredentials: true,
+        });
+        setUser(data);
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    checkUserSession();
+  }, []);
+
+  const logout = async () => {
+    try {
+      await axios.post(`${BACKEND_URL}/auth/logout`, {}, {
+        withCredentials: true,
+      });
+      setUser(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+      setUser(null);
+    }
+  };
+
+  const value = { user, isAuthenticated: !!user, isLoading, logout };
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
+  return context;
+};
