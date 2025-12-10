@@ -1,1 +1,10 @@
-https://uncg-my.sharepoint.com/:v:/g/personal/alkillian_uncg_edu/IQBMD6WRChPnT4xIikklVzWFAfLXSjfiK6So9TchafMWuKo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=SctTCi
+https://term-project-2r8a.onrender.com/
+
+Setup Instructions:
+
+npm install in /Term project
+
+node server.js
+
+cd react-client
+npm run dev 
