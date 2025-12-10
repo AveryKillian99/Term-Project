@@ -5,12 +5,14 @@ export default function QuoteComponent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_API_BASE_URL;
+
   const fetchQuote = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("http://localhost:5000/api/quote");
+      const response = await fetch(`${BACKEND_URL}/api/quote`);
       const data = await response.json();
 
       setQuote({
